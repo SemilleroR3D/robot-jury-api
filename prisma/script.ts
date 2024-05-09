@@ -17,7 +17,7 @@ export const user = [
     sex: Sex.Male,
     phone: '3027485520',
     email: 'garcianaranjodairo@gmail.com',
-    password: '123456',
+    password: '$2a$10$IYu/hAYY6BgsrzsBVaLpVe81e4SRMswLHu0s4EVzKKSukwYP8mdem',
     userTypeId: '0fa133e6-f19d-4c0d-9c14-7cc3ed58d0c3',
   },
 ];
