@@ -14,7 +14,7 @@ enum Sex {
 
 model UserType {
   id          String  @id @default(uuid())
-  name        String
+  name        String  @unique
   description String
   status      Boolean @default(true)
 
