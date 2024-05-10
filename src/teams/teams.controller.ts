@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UseGuards,
+  ParseUUIDPipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { TeamsService } from './teams.service';
 import { CreateTeamDto } from './dto/create-team.dto';
@@ -34,12 +36,20 @@ export class TeamsController {
     return this.teamsService.create(createTeamDto);
   }
 
-  @Post('add')
+  @Post('users')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: TeamEntity })
   addUsers(@Body() addUsersDto: AddUserDto) {
     return this.teamsService.addUsers(addUsersDto);
+  }
+
+  @Get('users/:id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: TeamEntity, isArray: true })
+  findTeamsUser(@Param('id', ParseUUIDPipe) id: string) {
+    return this.teamsService.findTeamUser(id);
   }
 
   @Get()
@@ -54,23 +64,26 @@ export class TeamsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: TeamEntity })
-  findOne(@Param('id') id: string) {
-    return this.teamsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.teamsService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: TeamEntity })
-  update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
-    return this.teamsService.update(+id, updateTeamDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateTeamDto: UpdateTeamDto,
+  ) {
+    return this.teamsService.update(id, updateTeamDto);
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: TeamEntity })
-  remove(@Param('id') id: string) {
-    return this.teamsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.teamsService.remove(id);
   }
 }

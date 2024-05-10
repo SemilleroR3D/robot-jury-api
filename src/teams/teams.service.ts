@@ -38,6 +38,15 @@ export class TeamsService {
     });
   }
 
+  async findTeamUser(id: string) {
+    const userOnTeams = await this.prisma.usersOnTeams.findMany({
+      where: { userId: id },
+      include: { team: true },
+    });
+
+    return userOnTeams.map(({ team }) => team);
+  }
+
   async update(id: number, updateTeamDto: UpdateTeamDto) {
     return this.prisma.team.update({
       where: { id },

@@ -59,3 +59,24 @@ model UsersOnTeams {
 
   @@id([userId, teamId])
 }
+
+model Banner {
+  id  Int    @id @default(autoincrement())
+  url String
+
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  competitionId String
+}
+
+model Competition {
+  id               String   @id @default(uuid())
+  name             String   @unique
+  description      String
+  place            String
+  startDate        DateTime
+  registerDeadline DateTime
+  deadlineUpdate   DateTime
+  status           Boolean  @default(true)
+
+  banners Banner[]
+}
