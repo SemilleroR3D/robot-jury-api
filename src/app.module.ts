@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { UsertypesModule } from './usertypes/usertypes.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { TeamsModule } from './teams/teams.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     UsertypesModule,
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    TeamsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

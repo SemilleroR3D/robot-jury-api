@@ -31,6 +31,31 @@ model User {
   email     String   @unique
   password  String
 
-  userType   UserType? @relation(fields: [userTypeId], references: [id])
+  userType   UserType?      @relation(fields: [userTypeId], references: [id])
   userTypeId String?
+  teams      UsersOnTeams[]
+}
+
+model Team {
+  id           Int      @id @default(autoincrement())
+  name         String
+  description  String?
+  img          String
+  video        String
+  status       Boolean  @default(true)
+  registerDate DateTime @default(now())
+
+  users UsersOnTeams[]
+}
+
+model UsersOnTeams {
+  status       Boolean  @default(true)
+  registerDate DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  team   Team   @relation(fields: [teamId], references: [id])
+  teamId Int
+
+  @@id([userId, teamId])
 }
