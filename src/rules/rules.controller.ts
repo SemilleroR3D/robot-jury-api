@@ -47,7 +47,7 @@ export class RulesController {
   @ApiBearerAuth()
   @ApiOkResponse({ type: RuleEntity })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.rulesService.findOne(+id);
+    return this.rulesService.findOne(id);
   }
 
   @Patch(':id')
@@ -58,7 +58,7 @@ export class RulesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateRuleDto: UpdateRuleDto,
   ) {
-    return this.rulesService.update(+id, updateRuleDto);
+    return this.rulesService.update(id, updateRuleDto);
   }
 
   @Delete(':id')
@@ -66,6 +66,6 @@ export class RulesController {
   @ApiBearerAuth()
   @ApiOkResponse({ type: RuleEntity })
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.rulesService.remove(+id);
+    return this.rulesService.remove(id);
   }
 }

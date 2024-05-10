@@ -102,3 +102,14 @@ model Rule {
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
 }
+
+model Robot {
+  id                String   @id @default(uuid())
+  name              String   @unique
+  description       String
+  img               String
+  connectionDiagram String
+  robotProgramming  String
+  status            Boolean  @default(true)
+  registerDate      DateTime
+}

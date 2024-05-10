@@ -10,6 +10,7 @@ import { TeamsModule } from './teams/teams.module';
 import { CompetitionsModule } from './competitions/competitions.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RulesModule } from './rules/rules.module';
+import { RobotsModule } from './robots/robots.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { RulesModule } from './rules/rules.module';
     CompetitionsModule,
     CategoriesModule,
     RulesModule,
+    RobotsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
