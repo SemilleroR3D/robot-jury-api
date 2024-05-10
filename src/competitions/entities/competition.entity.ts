@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Competition } from '@prisma/client';
 import { BannerEntity } from './banner.entity';
+import { CategoryEntity } from 'src/categories/entities/category.entity';
 
 export class CompetitionEntity implements Competition {
   @ApiProperty()
@@ -28,5 +29,8 @@ export class CompetitionEntity implements Competition {
   status: boolean;
 
   @ApiProperty()
-  banners?: BannerEntity[];
+  banners: BannerEntity[];
+
+  @ApiProperty()
+  categories: CategoryEntity[];
 }

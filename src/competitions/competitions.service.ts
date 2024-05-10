@@ -29,7 +29,7 @@ export class CompetitionsService {
   findOne(id: string) {
     return this.prisma.competition.findUniqueOrThrow({
       where: { id },
-      include: { banners: true },
+      include: { banners: true, categories: true },
     });
   }
 

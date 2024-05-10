@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TeamsModule } from './teams/teams.module';
 import { CompetitionsModule } from './competitions/competitions.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CompetitionsModule } from './competitions/competitions.module';
     ConfigModule.forRoot({ isGlobal: true }),
     TeamsModule,
     CompetitionsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

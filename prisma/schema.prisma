@@ -78,5 +78,27 @@ model Competition {
   deadlineUpdate   DateTime
   status           Boolean  @default(true)
 
-  banners Banner[]
+  banners    Banner[]
+  categories Category[]
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  status      Boolean @default(true)
+
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  competitionId String
+  rules         Rule[]
+}
+
+model Rule {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  status      Boolean @default(true)
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
 }
