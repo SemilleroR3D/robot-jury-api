@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TeamsModule } from './teams/teams.module';
 import { CompetitionsModule } from './competitions/competitions.module';
 import { CategoriesModule } from './categories/categories.module';
+import { RulesModule } from './rules/rules.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CategoriesModule } from './categories/categories.module';
     TeamsModule,
     CompetitionsModule,
     CategoriesModule,
+    RulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
