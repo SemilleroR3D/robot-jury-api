@@ -21,7 +21,7 @@ import {
 } from '@nestjs/swagger';
 import { TeamEntity } from './entities/team.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { AddUserDto } from './dto/add-user.dto';
+import { AddUserTeamDto } from './dto/add-team-user.dto';
 
 @Controller('teams')
 @ApiTags('teams')
@@ -40,7 +40,7 @@ export class TeamsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: TeamEntity })
-  addUsers(@Body() addUsersDto: AddUserDto) {
+  addUsers(@Body() addUsersDto: AddUserTeamDto) {
     return this.teamsService.addUsers(addUsersDto);
   }
 

@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { $Enums, User } from '@prisma/client';
 import { Exclude } from 'class-transformer';
+import { UsertypeEntity } from 'src/usertypes/entities/usertype.entity';
 
 export class UserEntity implements User {
   constructor(partial: Partial<UserEntity>) {
@@ -30,4 +31,7 @@ export class UserEntity implements User {
 
   @Exclude()
   password: string;
+
+  @ApiProperty({ isArray: true })
+  userTypes?: UsertypeEntity[];
 }

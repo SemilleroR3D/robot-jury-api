@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { AddUserDto } from './dto/add-user.dto';
+import { AddUserTeamDto } from './dto/add-team-user.dto';
 
 @Injectable()
 export class TeamsService {
@@ -22,7 +22,7 @@ export class TeamsService {
     return this.prisma.team.findUniqueOrThrow({ where: { id } });
   }
 
-  async addUsers(addUserDto: AddUserDto) {
+  async addUsers(addUserDto: AddUserTeamDto) {
     const { usersId, teamId } = addUserDto;
 
     await this.prisma.usersOnTeams.createMany({

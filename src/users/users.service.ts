@@ -35,10 +35,13 @@ export class UsersService {
 
   async findDrafts() {
     const users = await this.prisma.user.findMany({
-      include: { userTypes: true },
+      include: { userTypes: { include: { userType: true } } },
     });
 
-    return users.filter(({ userTypes }) => userTypes.length == 0);
+    return users.map((user) => {
+      const userTypes = user.userTypes.map(({ userType }) => userType);
+      return { ...user, userTypes };
+    });
   }
 
   findOne(id: string) {
