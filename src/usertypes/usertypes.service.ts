@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUsertypeDto } from './dto/create-usertype.dto';
 import { UpdateUsertypeDto } from './dto/update-usertype.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { AddUserDto } from './dto/add-user.dto';
 
 @Injectable()
 export class UsertypesService {
@@ -9,6 +10,10 @@ export class UsertypesService {
 
   create(createUsertypeDto: CreateUsertypeDto) {
     return this.prisma.userType.create({ data: createUsertypeDto });
+  }
+
+  addUser(addUserDto: AddUserDto) {
+    return this.prisma.userOnUserType.create({ data: addUserDto });
   }
 
   findAll() {

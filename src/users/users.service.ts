@@ -33,6 +33,14 @@ export class UsersService {
     return this.prisma.user.findMany({});
   }
 
+  async findDrafts() {
+    const users = await this.prisma.user.findMany({
+      include: { userTypes: true },
+    });
+
+    return users.filter(({ userTypes }) => userTypes.length == 0);
+  }
+
   findOne(id: string) {
     return this.prisma.user.findUniqueOrThrow({
       where: { id },

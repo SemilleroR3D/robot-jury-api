@@ -20,6 +20,8 @@ import {
 } from '@nestjs/swagger';
 import { UsertypeEntity } from './entities/usertype.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AddUserDto } from './dto/add-user.dto';
+import { UserOnUserTypeEntity } from './entities/useronusertype.entity';
 
 @Controller('usertypes')
 @ApiTags('usertypes')
@@ -32,6 +34,14 @@ export class UsertypesController {
   @ApiCreatedResponse({ type: UsertypeEntity })
   create(@Body() createUsertypeDto: CreateUsertypeDto) {
     return this.usertypesService.create(createUsertypeDto);
+  }
+
+  @Post('user')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: UserOnUserTypeEntity })
+  addUser(@Body() addUserDto: AddUserDto) {
+    return this.usertypesService.addUser(addUserDto);
   }
 
   @Get()

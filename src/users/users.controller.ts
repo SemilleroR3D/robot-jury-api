@@ -41,6 +41,15 @@ export class UsersController {
     return users.map((user) => new UserEntity(user));
   }
 
+  @Get('drafts')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: UserEntity, isArray: true })
+  async findDrafts() {
+    const users = await this.usersService.findDrafts();
+    return users.map((user) => new UserEntity(user));
+  }
+
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
