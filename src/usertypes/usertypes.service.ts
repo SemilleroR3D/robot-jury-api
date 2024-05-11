@@ -15,11 +15,15 @@ export class UsertypesService {
     return this.prisma.userType.findMany({});
   }
 
-  findOne(id: string) {
-    return this.prisma.userType.findUniqueOrThrow({
+  async findOne(id: string) {
+    const userType = await this.prisma.userType.findUniqueOrThrow({
       where: { id },
-      include: { users: true },
+      include: { users: { include: { user: true } } },
     });
+
+    const users = userType.users.map(({ user }) => user);
+
+    return { ...userType, users };
   }
 
   update(id: string, updateUsertypeDto: UpdateUsertypeDto) {

@@ -18,6 +18,12 @@ export const user = [
     phone: '3027485520',
     email: 'garcianaranjodairo@gmail.com',
     password: '$2a$10$IYu/hAYY6BgsrzsBVaLpVe81e4SRMswLHu0s4EVzKKSukwYP8mdem',
+  },
+];
+
+export const userOnUserType = [
+  {
+    userId: '7f54c29f-a6f4-4c61-99ac-2b3200c6a78c',
     userTypeId: '0fa133e6-f19d-4c0d-9c14-7cc3ed58d0c3',
   },
 ];

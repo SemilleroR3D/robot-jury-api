@@ -30,7 +30,4 @@ export class UserEntity implements User {
 
   @Exclude()
   password: string;
-
-  @ApiProperty({ required: false, nullable: true })
-  userTypeId: string | null;
 }

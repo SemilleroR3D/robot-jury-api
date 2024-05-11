@@ -18,7 +18,7 @@ model UserType {
   description String
   status      Boolean @default(true)
 
-  users User[]
+  users UserOnUserType[]
 }
 
 model User {
@@ -31,10 +31,22 @@ model User {
   email     String   @unique
   password  String
 
-  userType    UserType?          @relation(fields: [userTypeId], references: [id])
-  userTypeId  String?
   teams       UsersOnTeams[]
   evaluations UserOnEvaluation[]
+  userTypes   UserOnUserType[]
+}
+
+model UserOnUserType {
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userType   UserType @relation(fields: [userTypeId], references: [id])
+  userTypeId String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+
+  @@id([userId, userTypeId])
 }
 
 model Team {

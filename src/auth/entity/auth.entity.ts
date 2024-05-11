@@ -12,8 +12,8 @@ export class AuthEntity {
   email: string;
 
   @ApiProperty()
-  rol: UsertypeEntity;
-
-  @ApiProperty()
   accessToken: string;
+
+  @ApiProperty({ isArray: true })
+  userTypes: UsertypeEntity[];
 }

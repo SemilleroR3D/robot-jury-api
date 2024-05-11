@@ -33,12 +33,10 @@ export class UsersService {
     return this.prisma.user.findMany({});
   }
 
-  findDrafts() {
-    return this.prisma.user.findMany({ where: { userTypeId: null } });
-  }
-
   findOne(id: string) {
-    return this.prisma.user.findUniqueOrThrow({ where: { id } });
+    return this.prisma.user.findUniqueOrThrow({
+      where: { id },
+    });
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

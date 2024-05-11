@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { user, userType } from './script';
+import { user, userOnUserType, userType } from './script';
 
 const prisma = new PrismaClient();
 
@@ -11,6 +11,11 @@ const main = async () => {
 
   const users = await prisma.user.createMany({
     data: user,
+    skipDuplicates: true,
+  });
+
+  await prisma.userOnUserType.createMany({
+    data: userOnUserType,
     skipDuplicates: true,
   });
 

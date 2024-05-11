@@ -15,7 +15,7 @@ export class UsertypeEntity implements UserType {
   @ApiProperty()
   status: boolean;
 
-  @ApiProperty()
+  @ApiProperty({ isArray: true })
   users?: UserEntity[];
 
   constructor({ users, ...data }: Partial<UsertypeEntity>) {

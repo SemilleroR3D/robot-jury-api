@@ -19,7 +19,9 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({
       where: { email },
       include: {
-        userType: true,
+        userTypes: {
+          include: { userType: true },
+        },
       },
     });
 
@@ -35,13 +37,13 @@ export class AuthService {
       throw new UnauthorizedException('Contraseña inválida.');
     }
 
-    const { firstName, lastName } = user;
+    const { firstName, lastName, userTypes } = user;
 
     return {
       firstName,
       lastName,
       email: user.email,
-      rol: user.userType,
+      userTypes: userTypes.map(({ userType }) => userType),
       accessToken: this.jwtService.sign({ userId: user.id }),
     };
   }

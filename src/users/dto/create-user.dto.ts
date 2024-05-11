@@ -5,9 +5,7 @@ import {
   IsDateString,
   IsEmail,
   IsNotEmpty,
-  IsOptional,
   IsString,
-  IsUUID,
   Length,
   MinLength,
 } from 'class-validator';
@@ -51,11 +49,4 @@ export class CreateUserDto {
   @MinLength(6)
   @ApiProperty()
   password: string;
-
-  @IsString()
-  @IsOptional()
-  @IsNotEmpty()
-  @IsUUID()
-  @ApiProperty({ required: false })
-  userTypeId: string;
 }
