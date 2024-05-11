@@ -45,7 +45,8 @@ model Team {
   status       Boolean  @default(true)
   registerDate DateTime @default(now())
 
-  users UsersOnTeams[]
+  users                    UsersOnTeams[]
+  competitionRegistrations CompetitionRegistration[]
 }
 
 model UsersOnTeams {
@@ -88,9 +89,10 @@ model Category {
   description String
   status      Boolean @default(true)
 
-  competition   Competition @relation(fields: [competitionId], references: [id])
-  competitionId String
-  rules         Rule[]
+  competition              Competition               @relation(fields: [competitionId], references: [id])
+  competitionId            String
+  rules                    Rule[]
+  competitionRegistrations CompetitionRegistration[]
 }
 
 model Rule {
@@ -111,5 +113,28 @@ model Robot {
   connectionDiagram String
   robotProgramming  String
   status            Boolean  @default(true)
-  registerDate      DateTime
+  registerDate      DateTime @default(now())
+
+  competitionRegistrations CompetitionRegistration[]
+}
+
+enum StatusCompetitionRegister {
+  REGISTERED
+  INSCRIBED
+  REJECTED
+}
+
+model CompetitionRegistration {
+  id           String                    @id @default(uuid())
+  status       StatusCompetitionRegister @default(REGISTERED)
+  registerDate DateTime                  @default(now())
+  img          String
+  total        Decimal
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  team       Team     @relation(fields: [teamId], references: [id])
+  teamId     Int
+  robot      Robot?   @relation(fields: [robotId], references: [id])
+  robotId    String?
 }
