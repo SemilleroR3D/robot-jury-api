@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Category } from '@prisma/client';
+import { EvaluationEntity } from 'src/evaluations/entities/evaluation.entity';
 import { RuleEntity } from 'src/rules/entities/rule.entity';
 
 export class CategoryEntity implements Category {
@@ -20,4 +21,7 @@ export class CategoryEntity implements Category {
 
   @ApiProperty()
   rules: RuleEntity[];
+
+  @ApiProperty()
+  evaluations: EvaluationEntity[];
 }

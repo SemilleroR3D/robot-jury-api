@@ -18,7 +18,7 @@ export class CategoriesService {
   findOne(id: number) {
     return this.prisma.category.findUniqueOrThrow({
       where: { id },
-      include: { rules: true },
+      include: { rules: true, evaluations: true },
     });
   }
 

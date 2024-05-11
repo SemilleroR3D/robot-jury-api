@@ -31,9 +31,10 @@ model User {
   email     String   @unique
   password  String
 
-  userType   UserType?      @relation(fields: [userTypeId], references: [id])
-  userTypeId String?
-  teams      UsersOnTeams[]
+  userType    UserType?          @relation(fields: [userTypeId], references: [id])
+  userTypeId  String?
+  teams       UsersOnTeams[]
+  evaluations UserOnEvaluation[]
 }
 
 model Team {
@@ -93,6 +94,7 @@ model Category {
   competitionId            String
   rules                    Rule[]
   competitionRegistrations CompetitionRegistration[]
+  evaluations              Evaluation[]
 }
 
 model Rule {
@@ -131,10 +133,62 @@ model CompetitionRegistration {
   img          String
   total        Decimal
 
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  team       Team     @relation(fields: [teamId], references: [id])
-  teamId     Int
-  robot      Robot?   @relation(fields: [robotId], references: [id])
-  robotId    String?
+  category             Category          @relation(fields: [categoryId], references: [id])
+  categoryId           Int
+  team                 Team              @relation(fields: [teamId], references: [id])
+  teamId               Int
+  robot                Robot?            @relation(fields: [robotId], references: [id])
+  robotId              String?
+  evaluationCriterions CompetitionNote[]
+}
+
+model UserOnEvaluation {
+  date   DateTime @default(now())
+  status Boolean  @default(true)
+
+  evaluation   Evaluation @relation(fields: [evaluationId], references: [id])
+  evaluationId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@id([evaluationId, userId])
+}
+
+model Evaluation {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String
+  status      Boolean
+  percent     Int
+
+  category             Category              @relation(fields: [categoryId], references: [id])
+  categoryId           Int
+  evaluationCriterions EvaluationCriterion[]
+  users                UserOnEvaluation[]
+}
+
+model EvaluationCriterion {
+  id      Int     @id @default(autoincrement())
+  name    String
+  percent Int
+  status  Boolean
+
+  evaluation               Evaluation        @relation(fields: [evaluationId], references: [id])
+  evaluationId             String
+  competitionRegistrations CompetitionNote[]
+}
+
+model CompetitionNote {
+  note      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  evaluationCriterion   EvaluationCriterion @relation(fields: [evaluationCriterionId], references: [id])
+  evaluationCriterionId Int
+
+  competitionRegistration   CompetitionRegistration @relation(fields: [competitionRegistrationId], references: [id])
+  competitionRegistrationId String
+
+  @@id([evaluationCriterionId, competitionRegistrationId])
 }

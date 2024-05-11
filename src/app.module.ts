@@ -12,6 +12,8 @@ import { CategoriesModule } from './categories/categories.module';
 import { RulesModule } from './rules/rules.module';
 import { RobotsModule } from './robots/robots.module';
 import { RegistercompetitionModule } from './registercompetition/registercompetition.module';
+import { EvaluationsModule } from './evaluations/evaluations.module';
+import { EvaluationcriterionsModule } from './evaluationcriterions/evaluationcriterions.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { RegistercompetitionModule } from './registercompetition/registercompeti
     RulesModule,
     RobotsModule,
     RegistercompetitionModule,
+    EvaluationsModule,
+    EvaluationcriterionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
