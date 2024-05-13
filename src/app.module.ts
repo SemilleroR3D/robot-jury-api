@@ -14,6 +14,7 @@ import { RobotsModule } from './robots/robots.module';
 import { RegistercompetitionModule } from './registercompetition/registercompetition.module';
 import { EvaluationsModule } from './evaluations/evaluations.module';
 import { EvaluationcriterionsModule } from './evaluationcriterions/evaluationcriterions.module';
+import { JuriesModule } from './juries/juries.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EvaluationcriterionsModule } from './evaluationcriterions/evaluationcri
     RegistercompetitionModule,
     EvaluationsModule,
     EvaluationcriterionsModule,
+    JuriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
