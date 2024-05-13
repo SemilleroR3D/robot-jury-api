@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class CreateCompetitionDto {
   @IsString()
@@ -19,17 +19,17 @@ export class CreateCompetitionDto {
   place: string;
 
   @IsString()
-  @IsDate()
+  @IsDateString()
   @ApiProperty()
   startDate: Date;
 
   @IsString()
-  @IsDate()
+  @IsDateString()
   @ApiProperty()
   registerDeadline: Date;
 
   @IsString()
-  @IsDate()
+  @IsDateString()
   @ApiProperty()
   deadlineUpdate: Date;
 
