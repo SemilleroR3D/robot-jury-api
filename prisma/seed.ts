@@ -1,25 +1,99 @@
 import { PrismaClient } from '@prisma/client';
-import { user, userOnUserType, userType } from './script';
+import {
+  users,
+  userOnUserTypes,
+  userTypes,
+  categories,
+  competitions,
+  rules,
+  banners,
+  teams,
+  userOnTeams,
+  robots,
+  competitionRegistrations,
+  evaluations,
+  evaluationCriterions,
+  userOnEvaluations,
+  competitionNotes,
+} from './script';
 
 const prisma = new PrismaClient();
 
 const main = async () => {
-  const userTypes = await prisma.userType.createMany({
-    data: userType,
+  await prisma.userType.createMany({
+    data: userTypes,
     skipDuplicates: true,
   });
 
-  const users = await prisma.user.createMany({
-    data: user,
+  await prisma.user.createMany({
+    data: users,
     skipDuplicates: true,
   });
 
   await prisma.userOnUserType.createMany({
-    data: userOnUserType,
+    data: userOnUserTypes,
     skipDuplicates: true,
   });
 
-  console.log({ userTypes, users });
+  await prisma.competition.createMany({
+    data: competitions,
+    skipDuplicates: true,
+  });
+
+  await prisma.category.createMany({
+    data: categories,
+    skipDuplicates: true,
+  });
+
+  await prisma.rule.createMany({
+    data: rules,
+    skipDuplicates: true,
+  });
+
+  await prisma.banner.createMany({
+    data: banners,
+    skipDuplicates: true,
+  });
+
+  await prisma.team.createMany({
+    data: teams,
+    skipDuplicates: true,
+  });
+
+  await prisma.usersOnTeams.createMany({
+    data: userOnTeams,
+    skipDuplicates: true,
+  });
+
+  await prisma.robot.createMany({
+    data: robots,
+    skipDuplicates: true,
+  });
+
+  await prisma.competitionRegistration.createMany({
+    data: competitionRegistrations,
+    skipDuplicates: true,
+  });
+
+  await prisma.evaluation.createMany({
+    data: evaluations,
+    skipDuplicates: true,
+  });
+
+  await prisma.evaluationCriterion.createMany({
+    data: evaluationCriterions,
+    skipDuplicates: true,
+  });
+
+  await prisma.userOnEvaluation.createMany({
+    data: userOnEvaluations,
+    skipDuplicates: true,
+  });
+
+  await prisma.competitionNote.createMany({
+    data: competitionNotes,
+    skipDuplicates: true,
+  });
 };
 
 main()

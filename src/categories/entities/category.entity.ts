@@ -19,9 +19,9 @@ export class CategoryEntity implements Category {
   @ApiProperty()
   competitionId: string;
 
-  @ApiProperty()
+  @ApiProperty({ isArray: true })
   rules: RuleEntity[];
 
-  @ApiProperty()
+  @ApiProperty({ isArray: true })
   evaluations: EvaluationEntity[];
 }

@@ -19,7 +19,7 @@ export class JuriesService {
     });
 
     const users = userOnEvaluation.map(({ user, status }) => ({
-      user,
+      ...user,
       status,
     }));
 

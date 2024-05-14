@@ -24,7 +24,14 @@ export class RobotsService {
   }
 
   findOne(id: string) {
-    return this.prisma.robot.findUniqueOrThrow({ where: { id } });
+    return this.prisma.robot.findUniqueOrThrow({
+      where: { id },
+      include: {
+        competitionRegistrations: {
+          include: { team: true, category: { include: { competition: true } } },
+        },
+      },
+    });
   }
 
   update(id: string, updateRobotDto: UpdateRobotDto) {
