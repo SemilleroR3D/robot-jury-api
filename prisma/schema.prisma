@@ -34,6 +34,7 @@ model User {
   teams       UsersOnTeams[]
   evaluations UserOnEvaluation[]
   userTypes   UserOnUserType[]
+  logistics   UserOnLogistic[]
 }
 
 model UserOnUserType {
@@ -94,6 +95,7 @@ model Competition {
 
   banners    Banner[]
   categories Category[]
+  logistics  Logistic[]
 }
 
 model Category {
@@ -203,4 +205,38 @@ model CompetitionNote {
   competitionRegistrationId String
 
   @@id([evaluationCriterionId, competitionRegistrationId])
+}
+
+model Logistic {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  status      Boolean @default(true)
+
+  competition   Competition      @relation(fields: [competitionId], references: [id])
+  competitionId String
+  tasks         LogisticTask[]
+  users         UserOnLogistic[]
+}
+
+model LogisticTask {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  status      Boolean @default(true)
+
+  logistic   Logistic @relation(fields: [logisticId], references: [id])
+  logisticId Int
+}
+
+model UserOnLogistic {
+  date   DateTime @default(now())
+  status Boolean  @default(true)
+
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  logistic   Logistic @relation(fields: [logisticId], references: [id])
+  logisticId Int
+
+  @@id([userId, logisticId])
 }

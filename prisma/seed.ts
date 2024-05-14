@@ -15,6 +15,9 @@ import {
   evaluationCriterions,
   userOnEvaluations,
   competitionNotes,
+  logistics,
+  logisticTasks,
+  userOnLogistics,
 } from './script';
 
 const prisma = new PrismaClient();
@@ -92,6 +95,21 @@ const main = async () => {
 
   await prisma.competitionNote.createMany({
     data: competitionNotes,
+    skipDuplicates: true,
+  });
+
+  await prisma.logistic.createMany({
+    data: logistics,
+    skipDuplicates: true,
+  });
+
+  await prisma.logisticTask.createMany({
+    data: logisticTasks,
+    skipDuplicates: true,
+  });
+
+  await prisma.userOnLogistic.createMany({
+    data: userOnLogistics,
     skipDuplicates: true,
   });
 };

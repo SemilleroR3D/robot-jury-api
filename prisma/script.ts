@@ -219,3 +219,25 @@ export const competitionNotes = [
     competitionRegistrationId: '481a8b36-eb18-4089-8053-02647967e2b9',
   },
 ];
+
+export const logistics = [
+  {
+    id: 1,
+    name: 'Aseo',
+    description: 'Hacer aseo',
+    competitionId: '156a4e7b-b6cf-43d4-aefa-1bc2bc9e6b94',
+  },
+];
+
+export const logisticTasks = [
+  {
+    id: 1,
+    name: 'Barrer',
+    description: 'Barrer',
+    logisticId: 1,
+  },
+];
+
+export const userOnLogistics = [
+  { userId: '616680df-a5b4-4a7a-8cfe-98ea2fb92e7b', logisticId: 1 },
+];
