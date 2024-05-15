@@ -15,6 +15,7 @@ import { RegistercompetitionModule } from './registercompetition/registercompeti
 import { EvaluationsModule } from './evaluations/evaluations.module';
 import { EvaluationcriterionsModule } from './evaluationcriterions/evaluationcriterions.module';
 import { JuriesModule } from './juries/juries.module';
+import { BoardModule } from './board/board.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { JuriesModule } from './juries/juries.module';
     EvaluationsModule,
     EvaluationcriterionsModule,
     JuriesModule,
+    BoardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

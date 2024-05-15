@@ -147,13 +147,13 @@ model CompetitionRegistration {
   img          String
   total        Int
 
-  category             Category          @relation(fields: [categoryId], references: [id])
-  categoryId           Int
-  team                 Team              @relation(fields: [teamId], references: [id])
-  teamId               Int
-  robot                Robot?            @relation(fields: [robotId], references: [id])
-  robotId              String?
-  evaluationCriterions CompetitionNote[]
+  category   Category          @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  team       Team              @relation(fields: [teamId], references: [id])
+  teamId     Int
+  robot      Robot?            @relation(fields: [robotId], references: [id])
+  robotId    String?
+  notes      CompetitionNote[]
 }
 
 model UserOnEvaluation {
@@ -179,7 +179,7 @@ model Evaluation {
   category             Category              @relation(fields: [categoryId], references: [id])
   categoryId           Int
   evaluationCriterions EvaluationCriterion[]
-  users                UserOnEvaluation[]
+  juries               UserOnEvaluation[]
 }
 
 model EvaluationCriterion {
@@ -188,9 +188,9 @@ model EvaluationCriterion {
   percent Int
   status  Boolean @default(true)
 
-  evaluation               Evaluation        @relation(fields: [evaluationId], references: [id])
-  evaluationId             String
-  competitionRegistrations CompetitionNote[]
+  evaluation       Evaluation        @relation(fields: [evaluationId], references: [id])
+  evaluationId     String
+  teamInscriptions CompetitionNote[]
 }
 
 model CompetitionNote {
