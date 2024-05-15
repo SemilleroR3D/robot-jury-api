@@ -19,7 +19,7 @@ export class RegistercompetitionEntity implements CompetitionRegistration {
   img: string;
 
   @ApiProperty()
-  total: Decimal;
+  total: number;
 
   @ApiProperty()
   categoryId: number;
