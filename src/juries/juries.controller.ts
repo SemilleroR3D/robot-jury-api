@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { JuriesService } from './juries.service';
 import { CreateJuryDto } from './dto/create-jury.dto';
@@ -37,16 +38,26 @@ export class JuriesController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: JuryEntity, isArray: true })
-  findAll() {
-    return this.juriesService.findAll();
+  async findAll() {
+    const juries = await this.juriesService.findAll();
+    return juries.map((jury) => new JuryEntity(jury));
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: JuryEntity })
+  async getUserById(@Request() req: any) {
+    const { id } = req.user;
+    return new JuryEntity(await this.juriesService.findOne(id));
   }
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: JuryEntity })
-  findOne(@Param('id') id: string) {
-    return this.juriesService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return new JuryEntity(await this.juriesService.findOne(id));
   }
 
   @Patch(':id')
