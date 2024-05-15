@@ -147,13 +147,24 @@ model CompetitionRegistration {
   img          String
   total        Int
 
-  category   Category          @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  team       Team              @relation(fields: [teamId], references: [id])
-  teamId     Int
-  robot      Robot?            @relation(fields: [robotId], references: [id])
-  robotId    String?
-  notes      CompetitionNote[]
+  category           Category             @relation(fields: [categoryId], references: [id])
+  categoryId         Int
+  team               Team                 @relation(fields: [teamId], references: [id])
+  teamId             Int
+  robot              Robot?               @relation(fields: [robotId], references: [id])
+  robotId            String?
+  notes              CompetitionNote[]
+  participationOrder ParticipationOrder?
+}
+
+model ParticipationOrder {
+  id        Int     @id @default(autoincrement())
+  isRunning Boolean @default(false)
+  place     Int
+  try       Int
+
+  competitionRegistration   CompetitionRegistration @relation(fields: [competitionRegistrationId], references: [id])
+  competitionRegistrationId String @unique
 }
 
 model UserOnEvaluation {

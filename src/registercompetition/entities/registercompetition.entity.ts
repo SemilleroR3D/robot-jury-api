@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { $Enums, CompetitionRegistration } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/library';
 import { CategoryEntity } from 'src/categories/entities/category.entity';
+import { PositionEntity } from 'src/positions/entities/position.entity';
 import { RobotEntity } from 'src/robots/entities/robot.entity';
 import { TeamEntity } from 'src/teams/entities/team.entity';
 
@@ -38,4 +38,7 @@ export class RegistercompetitionEntity implements CompetitionRegistration {
 
   @ApiProperty()
   robot: RobotEntity;
+
+  @ApiProperty()
+  positionOrder: PositionEntity;
 }
