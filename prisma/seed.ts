@@ -18,6 +18,7 @@ import {
   logistics,
   logisticTasks,
   userOnLogistics,
+  participationOrder,
 } from './script';
 
 const prisma = new PrismaClient();
@@ -110,6 +111,11 @@ const main = async () => {
 
   await prisma.userOnLogistic.createMany({
     data: userOnLogistics,
+    skipDuplicates: true,
+  });
+
+  await prisma.participationOrder.createMany({
+    data: participationOrder,
     skipDuplicates: true,
   });
 };

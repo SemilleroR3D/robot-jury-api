@@ -6,9 +6,9 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class BoardService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findPositions() {
-    const competition = await this.prisma.competition.findFirstOrThrow({
-      where: { status: true },
+  async findPositions(id: string) {
+    return this.prisma.competition.findFirstOrThrow({
+      where: { id },
       include: {
         categories: {
           include: {
@@ -20,22 +20,16 @@ export class BoardService {
         },
       },
     });
-
-    const competitionRegistrations = competition.categories.flatMap(
-      (category) => category.competitionRegistrations,
-    );
-
-    return competitionRegistrations;
   }
 
-  async findBoard() {
+  async findBoard(id: string) {
     return this.prisma.competition.findFirstOrThrow({
-      where: { status: true },
+      where: { id },
       include: {
         categories: {
           include: {
             competitionRegistrations: {
-              where: { status: StatusCompetitionRegister.REGISTERED },
+              where: { status: StatusCompetitionRegister.INSCRIBED },
               include: {
                 notes: { include: { evaluationCriterion: true } },
                 robot: true,

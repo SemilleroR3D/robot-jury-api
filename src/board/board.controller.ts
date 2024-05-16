@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { BoardService } from './board.service';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -7,13 +7,13 @@ import { ApiTags } from '@nestjs/swagger';
 export class BoardController {
   constructor(private readonly boardService: BoardService) {}
 
-  @Get('positions')
-  findPositions() {
-    return this.boardService.findPositions();
+  @Get('positions/:id')
+  findPositions(@Param('id') id: string) {
+    return this.boardService.findPositions(id);
   }
 
   @Get()
-  findBoard() {
-    return this.boardService.findBoard();
+  findBoard(@Param('id') id: string) {
+    return this.boardService.findBoard(id);
   }
 }
