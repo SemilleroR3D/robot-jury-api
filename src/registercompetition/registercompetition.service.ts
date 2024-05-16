@@ -14,7 +14,19 @@ export class RegistercompetitionService {
   }
 
   findAll() {
-    return this.prisma.competitionRegistration.findMany({});
+    return this.prisma.competitionRegistration.findMany({
+      where: { status: 'INSCRIBED' },
+      include: {
+        robot: true,
+        notes: {
+          select: {
+            note: true,
+            competitionRegistrationId: true,
+            evaluationCriterionId: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: string) {

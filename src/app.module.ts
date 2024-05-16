@@ -16,6 +16,7 @@ import { EvaluationcriterionsModule } from './evaluationcriterions/evaluationcri
 import { JuriesModule } from './juries/juries.module';
 import { BoardModule } from './board/board.module';
 import { PositionsModule } from './positions/positions.module';
+import { NotesModule } from './notes/notes.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { PositionsModule } from './positions/positions.module';
     JuriesModule,
     BoardModule,
     PositionsModule,
+    NotesModule,
   ],
   providers: [AppService],
 })
