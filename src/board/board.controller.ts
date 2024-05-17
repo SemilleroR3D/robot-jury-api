@@ -12,7 +12,7 @@ export class BoardController {
     return this.boardService.findPositions(id);
   }
 
-  @Get()
+  @Get(':id')
   findBoard(@Param('id') id: string) {
     return this.boardService.findBoard(id);
   }
